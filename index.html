@@ -172,6 +172,20 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* Person Icons */
+    .person-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .person-icon {
+      transition: color 0.5s ease;
+      color: #ddd;
+    }
+    .person-icon.filled {
+      color: var(--accent-coral);
+    }
     .check-list-item::before {
       content: '✓';
       display: flex;
@@ -219,9 +233,19 @@
     }
     .review-card {
       background-color: #fff;
-      padding: 30px;
+      padding: 0;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+      overflow: hidden;
+    }
+    .review-card .review-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .review-card .review-body {
+      padding: 25px 30px 30px;
     }
     .review-card .stars { color: #facc15; font-size: 20px; margin-bottom: 10px; }
     .review-card .author { font-size: 16px; font-weight: 700; color: #333; margin-bottom: 15px; }
@@ -241,6 +265,17 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.04);
       text-align: center;
       flex: 1;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+    }
+    .stat-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stat-item.visible:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 42px rgba(0,0,0,0.07);
     }
     .stat-item .num { font-size: 48px; font-weight: 900; color: var(--accent-coral); margin-bottom: 10px; line-height: 1.2; }
     .stat-item .label { font-size: 18px; font-weight: 600; color: #999; }
@@ -258,9 +293,25 @@
       border-radius: 24px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.03);
       border-top: 6px solid var(--accent-coral);
+      text-align: center;
+      transition: opacity 0.65s ease, transform 0.65s ease, box-shadow 0.3s ease;
     }
-    .curr-card .step { font-size: 16px; font-weight: 800; color: var(--accent-coral); margin-bottom: 15px; }
-    .curr-card .title { font-size: 24px; font-weight: 800; margin-bottom: 25px; line-height: 1.4; }
+    .curr-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 24px 54px rgba(0,0,0,0.08);
+    }
+    .curr-card .step {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      background-color: var(--accent-coral);
+      padding: 8px 24px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+    .curr-card .title { font-size: 26px; font-weight: 800; margin-bottom: 25px; line-height: 1.4; }
     .curr-card ul { padding-left: 0; list-style: none; margin: 0; }
     .curr-card li { font-size: 16px; color: #555; margin-bottom: 12px; font-weight: 500; }
 
@@ -274,7 +325,15 @@
       flex: 1;
       padding: 50px 40px;
       border-radius: 24px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: opacity 0.65s ease, transform 0.65s ease, box-shadow 0.3s ease;
+    }
+    .scroll-rise-card {
+      opacity: 0;
+      transform: translateY(34px);
+    }
+    .scroll-rise-card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .comp-gray { background-color: var(--bg-gray); }
     .comp-gray:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
@@ -313,7 +372,7 @@
       align-items: center;
       justify-content: center;
       gap: 80px;
-      margin-bottom: 150px;
+      margin-bottom: 300px;
     }
     .part6-text { flex: 1; text-align: left; }
     .part6-phone { flex: 0 0 320px; }
@@ -354,7 +413,11 @@
       display: flex;
       gap: 10px;
       margin-bottom: 15px;
-      animation: floatUp 0.6s ease-out backwards;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .k-phone-mockup.chat-active .k-bubble-wrap {
+      animation: chatFloatUp 0.65s ease-out both;
     }
     .k-bubble-wrap:last-child {
       margin-bottom: 0;
@@ -365,6 +428,26 @@
     @keyframes floatUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes chatFloatUp {
+      from { opacity: 0; transform: translateY(24px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes softFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+    .hero-message-card {
+      animation: floatUp 0.8s ease-out 0.4s backwards, softFloat 3.2s ease-in-out 1.4s infinite;
+      border: 1px solid rgba(250, 90, 59, 0.18) !important;
+      box-shadow: 0 20px 50px rgba(250, 90, 59, 0.08), 0 0 0 6px rgba(250, 90, 59, 0.04);
+    }
+    .fact-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .fact-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 28px 60px rgba(0,0,0,0.08);
     }
     .k-profile {
       width: 40px;
@@ -408,7 +491,7 @@
       <h1 class="title-xl" style="margin-bottom: 20px;">분명 레시피대로 했는데,<br>왜 또 <span class="text-coral">망했을까?</span></h1>
       <p class="text-lg" style="margin-bottom: 100px; font-size: 22px; font-weight: 400;">유튜브, 블로그, 책 다 보고 따라해봐도<br>결국 실패로 돌아갔다면?</p>
       
-      <div class="card" style="display: inline-block; text-align: center; background-color: var(--bg-gray); border: none; animation: floatUp 0.8s ease-out 0.4s backwards;">
+      <div class="card hero-message-card" style="display: inline-block; text-align: center; background-color: var(--bg-gray); border: none;">
         <p class="text-lg" style="color: #333; line-height: 1.8;">
           베이킹이 처음이어도 괜찮아요.<br>
           <strong style="color: var(--accent-coral); font-size: 32px;">어디서 틀렸는지,</strong><br>
@@ -443,7 +526,7 @@
         </div>
       </div>
 
-      <div class="card" style="text-align: center;">
+      <div class="card fact-card" style="text-align: center;">
         <div class="badge-dark">핵심 팩트</div>
         <h2 class="title-lg">실력이 안 느는 건, <span class="text-coral">재능 탓이</span> 아닙니다.</h2>
         <p class="text-lg" style="margin-bottom: 40px; color: #111;">대부분의 실패는 레시피가 틀려서가 아니에요.</p>
@@ -481,7 +564,7 @@
       <div class="part6-wrap">
         <div class="part6-text">
           <div class="badge-coral">시크릿 채팅방 제공</div>
-          <h2 class="title-lg">그리고 혼자 두지 않습니다</h2>
+          <h2 class="title-lg" style="font-size: 64px;">그리고 혼자 두지 않습니다</h2>
           <p class="text-lg" style="line-height: 1.6;">수강생이 함께 하는 시크릿 채팅방,<br>푸이마 셰프가 직접 답합니다.</p>
         </div>
         
@@ -581,28 +664,52 @@
       
       <div class="card" style="text-align: center; background-color: var(--accent-coral-light); border: none; padding: 25px;">
         <p style="font-size: 22px; font-weight: 800; color: var(--accent-coral);">⭐ 263명 중 182명이 다음 강의를 또 신청했어요.</p>
+        <div class="person-row" id="personRow">
+          <svg class="person-icon" data-fill="true" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <svg class="person-icon" data-fill="true" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <svg class="person-icon" data-fill="true" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <svg class="person-icon" data-fill="true" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <svg class="person-icon" data-fill="true" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <svg class="person-icon" data-fill="true" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <svg class="person-icon" data-fill="true" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <svg class="person-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <svg class="person-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <svg class="person-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        </div>
       </div>
 
       <div class="review-grid">
         <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <div class="author">afjn*******님 26.03.24</div>
-          <div class="content">피일들어가서레시피보는데너무상세하게설명이잘되잇어서 초보인저도잘할수잇을거같아요^^ 꾸준히집에서쿠키등등 만들고잇는데 푸이마님레시피는일반적인제품이아니라고 급레시피라꼭따라해보고싶엇어요^^</div>
+          <img class="review-img" src="./assets/worried_baker.png" alt="수강생 후기 사진">
+          <div class="review-body">
+            <div class="stars">★★★★★</div>
+            <div class="author">afjn*******님 26.03.24</div>
+            <div class="content">피일들어가서레시피보는데너무상세하게설명이잘되잇어서 초보인저도잘할수잇을거같아요^^ 꾸준히집에서쿠키등등 만들고잇는데 푸이마님레시피는일반적인제품이아니라고 급레시피라꼭따라해보고싶엇어요^^</div>
+          </div>
         </div>
         <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <div class="author">hyun******님 26.03.26</div>
-          <div class="content">푸이마님 레시피로 다양한 휘낭시에를 만들고 먹어서 너무 행복했어요 저는 해외거주자라 여기선 휘낭시에 파는곳도 없고 배울수있는기회는 더욱 없었는데 여기서 온라인으로 자세하게 알려주고 먹고싶을때 만들어서 먹고 선물도 하니 기분이 좋네요! 감사합ㄷ니다단 ><</div>
+          <img class="review-img" src="./assets/review_financier.png" alt="휘낭시에 후기 사진">
+          <div class="review-body">
+            <div class="stars">★★★★★</div>
+            <div class="author">hyun******님 26.03.26</div>
+            <div class="content">푸이마님 레시피로 다양한 휘낭시에를 만들고 먹어서 너무 행복했어요 저는 해외거주자라 여기선 휘낭시에 파는곳도 없고 배울수있는기회는 더욱 없었는데 여기서 온라인으로 자세하게 알려주고 먹고싶을때 만들어서 먹고 선물도 하니 기분이 좋네요! 감사합ㄷ니다단 ><</div>
+          </div>
         </div>
         <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <div class="author">s2s2*****님 26.06.19</div>
-          <div class="content">두번째 수강인데 너무 만족합니다! 제대로 만들어 보고 싶어서 각봉도 구매했어요ㅎㅎ 맛도 있고 내용도 따라하기 쉽게 알려주셔서 좋았어요! 좋은 강의 감사합니다!</div>
+          <img class="review-img" src="./assets/review_cookies.png" alt="쿠키 후기 사진">
+          <div class="review-body">
+            <div class="stars">★★★★★</div>
+            <div class="author">s2s2*****님 26.06.19</div>
+            <div class="content">두번째 수강인데 너무 만족합니다! 제대로 만들어 보고 싶어서 각봉도 구매했어요ㅎㅎ 맛도 있고 내용도 따라하기 쉽게 알려주셔서 좋았어요! 좋은 강의 감사합니다!</div>
+          </div>
         </div>
         <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <div class="author">lala*****님 26.04.02</div>
-          <div class="content">파이지가 아주 잘나옵니다. 바사삭ㅎ 플랑의 점도는 아직 제가 정복을 못했지만 이건 제가 연습해야하는거라 다 시 잘해보려구요ㅎ 암튼 강의 자세하고 단계별로 잘해주셔 서 좋습니다ㅎ</div>
+          <img class="review-img" src="./assets/review_tart.png" alt="타르트 후기 사진">
+          <div class="review-body">
+            <div class="stars">★★★★★</div>
+            <div class="author">lala*****님 26.04.02</div>
+            <div class="content">파이지가 아주 잘나옵니다. 바사삭ㅎ 플랑의 점도는 아직 제가 정복을 못했지만 이건 제가 연습해야하는거라 다 시 잘해보려구요ㅎ 암튼 강의 자세하고 단계별로 잘해주셔 서 좋습니다ㅎ</div>
+          </div>
         </div>
       </div>
       
@@ -625,7 +732,7 @@
       <h2 class="title-lg" style="text-align: center;">유튜브로는 '보는 것'까지.<br>클래스는 '되는 것'까지.</h2>
       
       <div class="compare-wrap">
-        <div class="comp-col comp-gray">
+        <div class="comp-col comp-gray scroll-rise-card">
           <div class="comp-title">유튜브 무료 영상</div>
           <ul class="comp-list">
             <li>완성된 결과만 감상</li>
@@ -634,7 +741,7 @@
             <li style="border-bottom: none;">한 번 보고 끝</li>
           </ul>
         </div>
-        <div class="comp-col comp-white">
+        <div class="comp-col comp-white scroll-rise-card">
           <div class="comp-title text-coral">푸이마 클래스</div>
           <ul class="comp-list">
             <li>내 손으로 똑같이 재현</li>
@@ -654,9 +761,9 @@
       <h2 class="title-lg" style="text-align: center;">단순한 강의 10개가 아니라,<br>파티쉐의 기초를 통째로</h2>
       
       <div class="curr-grid">
-        <div class="curr-card">
-          <div class="step">STEP 1</div>
-          <div class="title">기초 - 반죽과 쿠키</div>
+        <div class="curr-card scroll-rise-card">
+          <div class="step">STEP 1 · 기초</div>
+          <div class="title">반죽과 쿠키</div>
           <ul>
             <li>1강 구움과자 (휘낭시에·마들렌)</li>
             <li>2강 파운드 케이크</li>
@@ -664,9 +771,9 @@
           </ul>
         </div>
         
-        <div class="curr-card">
-          <div class="step">STEP 2</div>
-          <div class="title">심화 - 크림, 시트, 무스를 다루다</div>
+        <div class="curr-card scroll-rise-card">
+          <div class="step">STEP 2 · 심화</div>
+          <div class="title">크림, 시트, 무스를 다루다</div>
           <ul>
             <li>4강 프레지에 (크렘 파티시에르)</li>
             <li>5강 슈 (파리브레스트·에클레어)</li>
@@ -677,9 +784,9 @@
           </ul>
         </div>
         
-        <div class="curr-card">
-          <div class="step">STEP 3</div>
-          <div class="title">졸업 - 모든 기술의 총동원</div>
+        <div class="curr-card scroll-rise-card">
+          <div class="step">STEP 3 · 졸업</div>
+          <div class="title">모든 기술의 총동원</div>
           <ul>
             <li>10강 앙트르메 (비스퀴, 글라사주)</li>
           </ul>
@@ -765,6 +872,31 @@
 
       counters.forEach(counter => observer.observe(counter));
 
+      // Stats card motion
+      const statItems = document.querySelectorAll(".stats-container .stat-item");
+      const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const index = [...statItems].indexOf(entry.target);
+          entry.target.style.transitionDelay = entry.isIntersecting ? `${index * 0.12}s` : '0s';
+          entry.target.classList.toggle('visible', entry.isIntersecting);
+        });
+      }, { threshold: 0.25 });
+
+      statItems.forEach(item => statObserver.observe(item));
+
+      // Compare and curriculum card motion
+      const riseCards = document.querySelectorAll(".scroll-rise-card");
+      const riseObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const siblings = [...entry.target.parentElement.querySelectorAll(".scroll-rise-card")];
+          const index = siblings.indexOf(entry.target);
+          entry.target.style.transitionDelay = entry.isIntersecting ? `${index * 0.14}s` : '0s';
+          entry.target.classList.toggle('visible', entry.isIntersecting);
+        });
+      }, { threshold: 0.22 });
+
+      riseCards.forEach(card => riseObserver.observe(card));
+
       // Checklist Fade-in Animation
       const checkItems = document.querySelectorAll(".check-list-item");
       const animateCheckItems = (entries, observer) => {
@@ -794,6 +926,41 @@
         });
       }, { threshold: 0.2 });
       fadeItems.forEach(item => fadeObserver.observe(item));
+
+      // Person Icons Fill Animation
+      const personRow = document.getElementById('personRow');
+      if (personRow) {
+        const personObserver = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const icons = personRow.querySelectorAll('.person-icon[data-fill="true"]');
+              icons.forEach((icon, i) => {
+                setTimeout(() => icon.classList.add('filled'), i * 150);
+              });
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
+        personObserver.observe(personRow);
+      }
+
+      // Replay Kakao chat bubbles whenever the phone mockup enters the viewport
+      const phoneMockup = document.querySelector('.k-phone-mockup');
+      if (phoneMockup) {
+        const chatObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              phoneMockup.classList.remove('chat-active');
+              void phoneMockup.offsetWidth;
+              phoneMockup.classList.add('chat-active');
+            } else {
+              phoneMockup.classList.remove('chat-active');
+            }
+          });
+        }, { threshold: 0.45 });
+
+        chatObserver.observe(phoneMockup);
+      }
     });
   </script>
 </body>
